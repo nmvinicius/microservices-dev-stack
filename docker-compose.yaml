@@ -1,0 +1,19 @@
+networks:
+  public:
+    name: public
+    driver: bridge
+  
+  private:
+    name: private
+    driver: bridge
+    internal: true
+
+
+services:
+  server:
+    extends:
+      file: server/compose.yaml
+      service: nginx
+    networks:
+      - public
+      - private
