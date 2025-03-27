@@ -17,3 +17,15 @@ services:
     networks:
       - public
       - private
+  database:
+    extends:
+      file: database/compose.yaml
+      service: postgres
+    networks:
+      - private
+  adminer:
+    extends:
+      file: database/compose.yaml
+      service: adminer
+    networks:
+      - private
