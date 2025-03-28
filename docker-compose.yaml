@@ -38,6 +38,12 @@ services:
       service: redis
     networks:
       - private
+  messaging:
+    extends:
+      file: messaging/compose.yaml
+      service: rabbitmq
+    networks:
+      - private
   auth:
     extends:
       file: auth/compose.yaml
