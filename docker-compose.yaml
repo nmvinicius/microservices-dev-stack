@@ -32,6 +32,12 @@ services:
     depends_on:
       database:
         condition: service_healthy
+  cache:
+    extends:
+      file: cache/compose.yaml
+      service: redis
+    networks:
+      - private
   auth:
     extends:
       file: auth/compose.yaml
