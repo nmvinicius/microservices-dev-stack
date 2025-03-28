@@ -16,6 +16,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./config
+          target: /docker-entrypoint-initdb.d/
   adminer:
     container_name: adminer
     image: adminer:latest

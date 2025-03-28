@@ -17,3 +17,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./config
+          target: /etc/nginx/
