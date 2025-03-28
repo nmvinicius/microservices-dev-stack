@@ -29,3 +29,15 @@ services:
       service: adminer
     networks:
       - private
+    depends_on:
+      database:
+        condition: service_healthy
+  auth:
+    extends:
+      file: auth/compose.yaml
+      service: keycloak
+    networks:
+      - private
+    depends_on:
+      database:
+        condition: service_healthy
