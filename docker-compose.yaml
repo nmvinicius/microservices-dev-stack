@@ -44,6 +44,12 @@ services:
       service: rabbitmq
     networks:
       - private
+  storage:
+    extends:
+      file: storage/compose.yaml
+      service: minio
+    networks:
+      - private
   auth:
     extends:
       file: auth/compose.yaml
