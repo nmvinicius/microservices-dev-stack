@@ -23,6 +23,15 @@ services:
       service: postgres
     networks:
       - private
+  auth:
+    extends:
+      file: auth/compose.yaml
+      service: keycloak
+    networks:
+      - private
+    depends_on:
+      database:
+        condition: service_healthy
   adminer:
     extends:
       file: database/compose.yaml
@@ -44,18 +53,12 @@ services:
       service: rabbitmq
     networks:
       - private
+    depends_on:
+      auth:
+        condition: service_healthy
   storage:
     extends:
       file: storage/compose.yaml
       service: minio
     networks:
       - private
-  auth:
-    extends:
-      file: auth/compose.yaml
-      service: keycloak
-    networks:
-      - private
-    depends_on:
-      database:
-        condition: service_healthy

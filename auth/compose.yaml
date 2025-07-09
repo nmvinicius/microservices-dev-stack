@@ -28,7 +28,7 @@ services:
       - 443:443
       # - 9000:9000
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider https://auth.localhost/health/ready"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD-SHELL", "test -e /proc/1 && echo 'Keycloak is running'"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

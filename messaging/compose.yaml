@@ -2,11 +2,18 @@ services:
   rabbitmq:
     image: rabbitmq:management
     container_name: rabbitmq
+    extra_hosts:
+      - "auth.localhost:172.18.0.7"
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_ENABLED_PLUGINS_FILE: /etc/rabbitmq/enabled_plugins
     volumes:
       - ./data:/var/lib/rabbitmq
+      - ./config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./config/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ../server/config/certs/wildcard.localhost.crt:/etc/rabbitmq/certs/wildcard.localhost.crt:ro
+      - ./config/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
     ports:
       - 5672:5672
       - 15672:15672
